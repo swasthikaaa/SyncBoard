@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { FileText, Mail, Lock, User, ArrowRight, AlertCircle, Loader2, CheckCircle2, Zap, Users } from 'lucide-react';
+import { Loader2, Facebook, Github, Chrome } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function RegisterPage() {
@@ -34,208 +34,107 @@ export default function RegisterPage() {
                 setError(data.error || 'Something went wrong');
             }
         } catch {
-            setError('Connection error. Please try again.');
+            setError('Connection error');
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <div style={{ minHeight: '100vh', display: 'flex', background: '#fff', fontFamily: 'Inter, sans-serif' }}>
-
-            {/* Left Sidebar Content - Branding & Features */}
-            <div style={{
-                flex: 1,
-                background: '#6366f1',
-                padding: '60px',
-                display: 'none',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                color: '#fff',
-                position: 'relative',
-                overflow: 'hidden',
-                '@media (min-width: 1024px)': { display: 'flex' }
-            } as any} className="hidden lg:flex">
-
-                {/* Background Decorative Element */}
+        <div style={{
+            minHeight: '100vh',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: '#d1e0f0',
+            fontFamily: '"Inter", sans-serif',
+            padding: '20px'
+        }}>
+            <motion.div
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                style={{
+                    display: 'flex',
+                    width: '100%',
+                    maxWidth: '960px',
+                    minHeight: '600px',
+                    background: '#fff',
+                    boxShadow: '0 30px 60px -12px rgba(30, 27, 75, 0.25)',
+                    overflow: 'hidden',
+                    flexDirection: 'row',
+                    borderRadius: '4px'
+                }}
+            >
+                {/* Left Side - Register Form */}
                 <div style={{
-                    position: 'absolute',
-                    bottom: '-10%',
-                    left: '-10%',
-                    width: '500px',
-                    height: '500px',
-                    borderRadius: '50%',
-                    background: 'rgba(255,255,255,0.05)',
-                    zIndex: 0
-                }} />
+                    flex: 1,
+                    padding: '60px 80px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                }}>
+                    <h1 style={{ fontSize: '48px', fontWeight: 900, color: '#1e1b4b', marginBottom: '30px', letterSpacing: '-0.02em' }}>Sign Up</h1>
 
-                <div style={{ position: 'relative', zIndex: 1, maxWidth: '440px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: '40px' }}>
-                        <div style={{ background: '#fff', padding: 10, borderRadius: '12px', display: 'flex' }}>
-                            <FileText size={28} color="#6366f1" />
-                        </div>
-                        <span style={{ fontSize: '28px', fontWeight: 900, letterSpacing: '-0.04em' }}>SyncBoard</span>
-                    </div>
+                    <form onSubmit={handleSubmit} style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                        {error && <p style={{ color: '#ef4444', fontSize: '13px', textAlign: 'center', fontWeight: 'bold' }}>{error}</p>}
 
-                    <h1 style={{ fontSize: '48px', fontWeight: 900, lineHeight: 1.1, marginBottom: '24px', letterSpacing: '-0.05em' }}>
-                        Start creating <br />
-                        <span style={{ opacity: 0.7 }}>without boundaries.</span>
-                    </h1>
+                        <input
+                            type="text"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            placeholder="Full Name"
+                            required
+                            style={{
+                                width: '100%',
+                                background: '#f8fafc',
+                                border: '1.5px solid #eef2f6',
+                                padding: '16px 20px',
+                                borderRadius: '8px',
+                                fontSize: '15px',
+                                outline: 'none',
+                                color: '#1e1b4b',
+                                fontWeight: 500
+                            }}
+                        />
 
-                    <p style={{ fontSize: '18px', lineHeight: 1.6, marginBottom: '48px', opacity: 0.9, fontWeight: 500 }}>
-                        Join thousands of teams who trust SyncBoard for their real-time collaboration needs.
-                    </p>
+                        <input
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="Email address"
+                            required
+                            style={{
+                                width: '100%',
+                                background: '#f8fafc',
+                                border: '1.5px solid #eef2f6',
+                                padding: '16px 20px',
+                                borderRadius: '8px',
+                                fontSize: '15px',
+                                outline: 'none',
+                                color: '#1e1b4b',
+                                fontWeight: 500
+                            }}
+                        />
 
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-                        <div style={{ display: 'flex', gap: 16 }}>
-                            <div style={{ background: 'rgba(255,255,255,0.15)', padding: 10, borderRadius: '12px', height: 'fit-content' }}>
-                                <Zap size={20} />
-                            </div>
-                            <div>
-                                <h4 style={{ fontSize: '18px', fontWeight: 800, marginBottom: '4px' }}>Fast Set Up</h4>
-                                <p style={{ opacity: 0.7, fontSize: '14px' }}>Get your workspace running in seconds with zero configuration.</p>
-                            </div>
-                        </div>
-
-                        <div style={{ display: 'flex', gap: 16 }}>
-                            <div style={{ background: 'rgba(255,255,255,0.15)', padding: 10, borderRadius: '12px', height: 'fit-content' }}>
-                                <CheckCircle2 size={20} />
-                            </div>
-                            <div>
-                                <h4 style={{ fontSize: '18px', fontWeight: 800, marginBottom: '4px' }}>Enterprise Security</h4>
-                                <p style={{ opacity: 0.7, fontSize: '14px' }}>Your data is encrypted end-to-end and stored securely in the cloud.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {/* Right Content - Register Form */}
-            <div style={{
-                flex: 1,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                padding: '40px',
-                background: '#f8fafc'
-            }}>
-                <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    style={{ width: '100%', maxWidth: '400px' }}
-                >
-                    <div style={{ marginBottom: '40px' }}>
-                        <div className="lg:hidden" style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: '32px' }}>
-                            <div style={{ background: '#6366f1', padding: 8, borderRadius: '10px', display: 'flex' }}>
-                                <FileText size={20} color="#fff" />
-                            </div>
-                            <span style={{ fontSize: '20px', fontWeight: 900, color: '#0f172a' }}>SyncBoard</span>
-                        </div>
-                        <h2 style={{ fontSize: '32px', fontWeight: 900, color: '#0f172a', marginBottom: '8px', letterSpacing: '-0.03em' }}>Create Account</h2>
-                        <p style={{ color: '#64748b', fontWeight: 500 }}>Join SyncBoard today for free.</p>
-                    </div>
-
-                    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-                        {error && (
-                            <div style={{
-                                background: '#fef2f2',
-                                border: '1px solid #fee2e2',
-                                color: '#ef4444',
-                                padding: '14px 16px',
-                                borderRadius: '16px',
-                                fontSize: '13px',
-                                fontWeight: 700,
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '12px'
-                            }}>
-                                <AlertCircle size={18} />
-                                {error}
-                            </div>
-                        )}
-
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                            <label style={{ fontSize: '12px', fontWeight: 800, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Full Name</label>
-                            <div style={{ position: 'relative' }}>
-                                <User style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: '#cbd5e1' }} size={18} />
-                                <input
-                                    type="text"
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                    placeholder="John Doe"
-                                    required
-                                    style={{
-                                        width: '100%',
-                                        background: '#fff',
-                                        border: '1.5px solid #e2e8f0',
-                                        borderRadius: '16px',
-                                        padding: '16px 16px 16px 48px',
-                                        fontSize: '15px',
-                                        outline: 'none',
-                                        transition: 'all 0.2s',
-                                        color: '#0f172a',
-                                        fontWeight: 500
-                                    }}
-                                    onFocus={(e) => e.target.style.borderColor = '#6366f1'}
-                                    onBlur={(e) => e.target.style.borderColor = '#e2e8f0'}
-                                />
-                            </div>
-                        </div>
-
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                            <label style={{ fontSize: '12px', fontWeight: 800, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Email</label>
-                            <div style={{ position: 'relative' }}>
-                                <Mail style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: '#cbd5e1' }} size={18} />
-                                <input
-                                    type="email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    placeholder="name@company.com"
-                                    required
-                                    style={{
-                                        width: '100%',
-                                        background: '#fff',
-                                        border: '1.5px solid #e2e8f0',
-                                        borderRadius: '16px',
-                                        padding: '16px 16px 16px 48px',
-                                        fontSize: '15px',
-                                        outline: 'none',
-                                        transition: 'all 0.2s',
-                                        color: '#0f172a',
-                                        fontWeight: 500
-                                    }}
-                                    onFocus={(e) => e.target.style.borderColor = '#6366f1'}
-                                    onBlur={(e) => e.target.style.borderColor = '#e2e8f0'}
-                                />
-                            </div>
-                        </div>
-
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                            <label style={{ fontSize: '12px', fontWeight: 800, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Password</label>
-                            <div style={{ position: 'relative' }}>
-                                <Lock style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: '#cbd5e1' }} size={18} />
-                                <input
-                                    type="password"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    placeholder="••••••••"
-                                    required
-                                    style={{
-                                        width: '100%',
-                                        background: '#fff',
-                                        border: '1.5px solid #e2e8f0',
-                                        borderRadius: '16px',
-                                        padding: '16px 16px 16px 48px',
-                                        fontSize: '15px',
-                                        outline: 'none',
-                                        transition: 'all 0.2s',
-                                        color: '#0f172a'
-                                    }}
-                                    onFocus={(e) => e.target.style.borderColor = '#6366f1'}
-                                    onBlur={(e) => e.target.style.borderColor = '#e2e8f0'}
-                                />
-                            </div>
-                        </div>
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Password"
+                            required
+                            style={{
+                                width: '100%',
+                                background: '#f8fafc',
+                                border: '1.5px solid #eef2f6',
+                                padding: '16px 20px',
+                                borderRadius: '8px',
+                                fontSize: '15px',
+                                outline: 'none',
+                                color: '#1e1b4b',
+                                fontWeight: 500
+                            }}
+                        />
 
                         <button
                             type="submit"
@@ -244,40 +143,80 @@ export default function RegisterPage() {
                                 background: '#6366f1',
                                 color: '#fff',
                                 border: 'none',
-                                borderRadius: '16px',
                                 padding: '18px',
-                                fontWeight: 900,
-                                fontSize: '15px',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                gap: '12px',
+                                borderRadius: '8px',
+                                fontWeight: 800,
+                                fontSize: '16px',
                                 cursor: loading ? 'default' : 'pointer',
+                                marginTop: '10px',
                                 boxShadow: '0 10px 15px -3px rgba(99, 102, 241, 0.3)',
-                                transition: 'all 0.2s',
-                                marginTop: '12px'
+                                transition: 'all 0.2s'
                             }}
                             onMouseEnter={(e) => e.currentTarget.style.background = '#4f46e5'}
                             onMouseLeave={(e) => e.currentTarget.style.background = '#6366f1'}
                         >
-                            {loading ? <Loader2 className="animate-spin" size={20} /> : <>Create Account <ArrowRight size={20} /></>}
+                            {loading ? <Loader2 className="animate-spin" style={{ margin: '0 auto' }} /> : 'Sign Up'}
                         </button>
                     </form>
 
-                    <p style={{ marginTop: '40px', textAlign: 'center', fontSize: '14px', color: '#64748b', fontWeight: 500 }}>
-                        Already have an account?{' '}
-                        <Link href="/auth/login" style={{ fontWeight: 800, color: '#6366f1', textDecoration: 'none' }}>
-                            Sign in here
-                        </Link>
+                    <div style={{ marginTop: '30px', textAlign: 'center' }}>
+                        <p style={{ fontSize: '12px', fontWeight: 800, color: '#94a3b8', marginBottom: '15px', textTransform: 'uppercase', letterSpacing: '0.1em' }}>or sign up with</p>
+                        <div style={{ display: 'flex', gap: '15px', justifyContent: 'center' }}>
+                            <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: '#fff', border: '1.5px solid #e2e8f0', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#1e1b4b', cursor: 'pointer' }}>
+                                <Facebook size={18} fill="currentColor" />
+                            </div>
+                            <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: '#fff', border: '1.5px solid #e2e8f0', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#1e1b4b', cursor: 'pointer' }}>
+                                <Chrome size={18} />
+                            </div>
+                            <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: '#fff', border: '1.5px solid #e2e8f0', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#1e1b4b', cursor: 'pointer' }}>
+                                <Github size={18} fill="currentColor" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Right Side - Branding/Switch */}
+                <div style={{
+                    flex: 1,
+                    background: 'linear-gradient(135deg, #1e1b4b 0%, #6366f1 100%)',
+                    padding: '60px 50px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#fff',
+                    textAlign: 'center',
+                    position: 'relative',
+                    overflow: 'hidden'
+                }}>
+                    <div style={{ position: 'absolute', top: '-10%', left: '-10%', width: '300px', height: '300px', background: 'rgba(255,255,255,0.05)', borderRadius: '50%' }} />
+
+                    <h2 style={{ fontSize: '32px', fontWeight: 900, marginBottom: '20px', letterSpacing: '-0.01em', position: 'relative' }}>Join us!</h2>
+                    <p style={{ fontSize: '16px', lineHeight: '1.7', marginBottom: '40px', opacity: 0.9, position: 'relative', fontWeight: 500 }}>
+                        Join our community today and start collaborating in real-time. Experience the most powerful workspace for your team.
                     </p>
 
-                    <footer style={{ marginTop: '60px', textAlign: 'center' }}>
-                        <p style={{ fontSize: '11px', color: '#94a3b8', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                            &copy; 2024 SyncBoard Inc. All rights reserved.
-                        </p>
-                    </footer>
-                </motion.div>
-            </div>
+                    <Link href="/auth/login" style={{ textDecoration: 'none', position: 'relative' }}>
+                        <div style={{
+                            border: '2px solid rgba(255,255,255,0.4)',
+                            padding: '14px 50px',
+                            borderRadius: '50px',
+                            color: '#fff',
+                            fontWeight: '800',
+                            fontSize: '14px',
+                            transition: 'all 0.3s',
+                            background: 'rgba(255,255,255,0.1)',
+                            backdropFilter: 'blur(10px)',
+                            display: 'inline-block'
+                        }}
+                            onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.2)'}
+                            onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.1)'}
+                        >
+                            Already have an account? Sign In.
+                        </div>
+                    </Link>
+                </div>
+            </motion.div>
         </div>
     );
 }
