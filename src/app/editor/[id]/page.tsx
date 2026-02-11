@@ -207,63 +207,109 @@ export default function EditorPage() {
     return (
         <div style={{ minHeight: '100vh', background: '#fff', color: '#0f172a' }}>
             {/* Navbar */}
-            <header style={{ height: 64, borderBottom: '1px solid #e2e8f0', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 24px', position: 'sticky', top: 0, background: '#fff', zIndex: 100 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+            <header
+                style={{ height: 56, borderBottom: '1px solid #e2e8f0', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 12px', position: 'sticky', top: 0, background: '#fff', zIndex: 100 }}
+            >
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, minWidth: 0, flex: 1 }}>
                     <button
                         onClick={() => window.location.href = '/dashboard'}
-                        style={{ padding: 8, background: 'none', border: 'none', cursor: 'pointer', color: '#64748b' }}
+                        style={{ padding: 8, background: 'none', border: 'none', cursor: 'pointer', color: '#64748b', display: 'flex', alignItems: 'center' }}
                     >
                         <ChevronLeft size={20} strokeWidth={3} />
                     </button>
 
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                        <FileText size={20} color="#6366f1" />
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, minWidth: 0, flex: 1 }}>
+                        <div className="mobile-hide">
+                            <FileText size={18} color="#6366f1" />
+                        </div>
                         <input
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
-                            placeholder="Untitled Document"
-                            style={{ border: 'none', outline: 'none', fontSize: 16, fontWeight: 800, width: 200 }}
+                            placeholder="Untitled"
+                            style={{
+                                border: 'none',
+                                outline: 'none',
+                                fontSize: 14,
+                                fontWeight: 800,
+                                width: '100%',
+                                background: 'transparent',
+                                color: '#0f172a',
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis'
+                            }}
                             onBlur={handleManualSave}
                         />
                     </div>
-
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginLeft: 20 }}>
-                        {isSaving ? (
-                            <div style={{ fontSize: 12, color: '#6366f1', display: 'flex', alignItems: 'center', gap: 6, fontWeight: 700 }}>
-                                <Loader2 size={12} className="animate-spin" /> SAVING...
-                            </div>
-                        ) : lastSaved ? (
-                            <div style={{ fontSize: 12, color: '#10b981', display: 'flex', alignItems: 'center', gap: 6, fontWeight: 700 }}>
-                                <Check size={12} strokeWidth={3} /> SAVED
-                            </div>
-                        ) : null}
-                        {saveError && (
-                            <div style={{ fontSize: 12, color: '#ef4444', display: 'flex', alignItems: 'center', gap: 6, fontWeight: 700 }}>
-                                <AlertCircle size={12} /> {saveError}
-                            </div>
-                        )}
-                    </div>
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexShrink: 0, marginLeft: 8 }}>
+                    <div className="mobile-hide" style={{ marginRight: 8 }}>
+                        {isSaving ? (
+                            <div style={{ fontSize: 10, color: '#6366f1', display: 'flex', alignItems: 'center', gap: 4, fontWeight: 700 }}>
+                                <Loader2 size={10} className="animate-spin" /> SAVING
+                            </div>
+                        ) : lastSaved ? (
+                            <div style={{ fontSize: 10, color: '#10b981', display: 'flex', alignItems: 'center', gap: 4, fontWeight: 700 }}>
+                                <Check size={10} strokeWidth={3} /> SAVED
+                            </div>
+                        ) : null}
+                    </div>
+
                     <button
                         onClick={handleManualSave}
                         disabled={isSaving}
-                        style={{ background: '#6366f1', color: '#fff', border: 'none', padding: '8px 24px', borderRadius: 10, fontWeight: 800, cursor: isSaving ? 'default' : 'pointer', fontSize: 13 }}
+                        style={{
+                            background: '#6366f1',
+                            color: '#fff',
+                            border: 'none',
+                            padding: '6px 14px',
+                            borderRadius: 8,
+                            fontWeight: 800,
+                            cursor: isSaving ? 'default' : 'pointer',
+                            fontSize: 11,
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 6
+                        }}
                     >
-                        {isSaving ? 'SYNCING...' : 'SAVE'}
+                        {isSaving ? <Loader2 size={12} className="animate-spin" /> : <Save size={14} className="mobile-hide" />}
+                        <span>SAVE</span>
                     </button>
                     <button
                         onClick={() => setShowShareModal(true)}
-                        style={{ padding: '8px 16px', background: '#fff', border: '1.5px solid #e2e8f0', borderRadius: 10, fontWeight: 700, cursor: 'pointer', fontSize: 13, color: '#475569' }}
+                        style={{
+                            width: 34,
+                            height: 34,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            background: '#fff',
+                            border: '1.5px solid #e2e8f0',
+                            borderRadius: 8,
+                            cursor: 'pointer',
+                            color: '#475569'
+                        }}
                     >
-                        SHARE
+                        <UserPlus size={16} />
                     </button>
                 </div>
             </header>
 
             {/* Toolbar */}
-            <div style={{ borderBottom: '1px solid #f1f5f9', padding: '8px', display: 'flex', justifyContent: 'center', gap: 4, flexWrap: 'wrap', position: 'sticky', top: 64, background: '#fff', zIndex: 90 }}>
+            <div
+                style={{
+                    borderBottom: '1px solid #f1f5f9',
+                    padding: '8px 12px',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    gap: 4,
+                    flexWrap: 'wrap',
+                    position: 'sticky',
+                    top: 56,
+                    background: '#fff',
+                    zIndex: 90
+                }}
+            >
                 {[
                     { tag: 'B', action: () => editor.chain().focus().toggleBold().run(), active: editor.isActive('bold') },
                     { tag: 'I', action: () => editor.chain().focus().toggleItalic().run(), active: editor.isActive('italic') },
@@ -277,14 +323,15 @@ export default function EditorPage() {
                         key={i}
                         onClick={btn.action}
                         style={{
-                            padding: '6px 14px',
-                            background: btn.active ? '#0f172a' : '#fff',
+                            padding: '6px 12px',
+                            background: btn.active ? '#0f172a' : '#f8fafc',
                             color: btn.active ? '#fff' : '#475569',
                             border: '1px solid #e2e8f0',
-                            borderRadius: 8,
-                            fontSize: 11,
+                            borderRadius: 6,
+                            fontSize: 10,
                             fontWeight: 800,
-                            cursor: 'pointer'
+                            cursor: 'pointer',
+                            minWidth: 36
                         }}
                     >
                         {btn.tag}
@@ -293,7 +340,17 @@ export default function EditorPage() {
             </div>
 
             {/* Editor Area */}
-            <div style={{ background: '#fff', transition: 'all 0.4s', opacity: initialLoadDone.current ? 1 : 0 }}>
+            <div
+                className="mobile-full"
+                style={{
+                    background: '#fff',
+                    transition: 'all 0.4s',
+                    opacity: initialLoadDone.current ? 1 : 0,
+                    maxWidth: 800,
+                    margin: '0 auto',
+                    paddingBottom: 40
+                }}
+            >
                 <EditorContent editor={editor} />
             </div>
 
@@ -328,6 +385,7 @@ export default function EditorPage() {
                             initial={{ scale: 0.9, opacity: 0, y: 20 }}
                             animate={{ scale: 1, opacity: 1, y: 0 }}
                             exit={{ scale: 0.9, opacity: 0, y: 20 }}
+                            className="mobile-p-24 mobile-full"
                             style={{
                                 position: 'relative',
                                 background: '#fff',
@@ -342,11 +400,12 @@ export default function EditorPage() {
                             <h3 style={{ fontSize: 24, fontWeight: 900, marginBottom: 8, color: '#0f172a', letterSpacing: '-0.03em' }}>Invite Collaborators</h3>
                             <p style={{ color: '#64748b', fontSize: 14, marginBottom: 24, fontWeight: 500 }}>Share this document with your team members by email.</p>
 
-                            <div style={{ display: 'flex', gap: 10 }}>
+                            <div style={{ display: 'flex', gap: 10 }} className="mobile-stack">
                                 <input
                                     value={shareEmail}
                                     onChange={(e) => setShareEmail(e.target.value)}
                                     placeholder="Enter collaborator email"
+                                    className="mobile-full"
                                     style={{
                                         flex: 1,
                                         padding: '14px 18px',
@@ -360,18 +419,24 @@ export default function EditorPage() {
                                 />
                                 <button
                                     onClick={handleShare}
+                                    className="mobile-full"
                                     style={{
-                                        padding: '0 20px',
+                                        padding: '14px 24px',
                                         background: '#6366f1',
                                         color: '#fff',
                                         border: 'none',
                                         borderRadius: 16,
                                         fontWeight: 900,
                                         cursor: 'pointer',
-                                        boxShadow: '0 4px 12px rgba(99, 102, 241, 0.3)'
+                                        boxShadow: '0 4px 12px rgba(99, 102, 241, 0.3)',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        gap: 8
                                     }}
                                 >
-                                    <Plus size={22} />
+                                    <Plus size={20} />
+                                    <span className="mobile-only">Invite Member</span>
                                 </button>
                             </div>
 

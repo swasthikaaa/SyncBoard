@@ -83,11 +83,12 @@ function ResetPasswordContent() {
             <motion.div
                 initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
+                className="mobile-padding mobile-full"
                 style={{
                     width: '100%',
                     maxWidth: '500px',
                     background: '#fff',
-                    padding: '60px 40px',
+                    padding: '60px 48px',
                     boxShadow: '0 30px 60px -12px rgba(30, 27, 75, 0.25)',
                     borderRadius: '24px',
                     textAlign: 'center'

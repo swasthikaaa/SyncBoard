@@ -52,6 +52,7 @@ export default function ForgotPasswordPage() {
             <motion.div
                 initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
+                className="mobile-padding mobile-full"
                 style={{
                     width: '100%',
                     maxWidth: '500px',

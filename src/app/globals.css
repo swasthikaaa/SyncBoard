@@ -16,6 +16,13 @@
 
   --font-sans: 'Inter', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
+  --fs-title: 48px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --fs-title: 28px;
+  }
 }
 
 * {
@@ -123,4 +130,84 @@ body {
 
 .transition-all {
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Mobile Responsiveness Utilities */
+@media (max-width: 768px) {
+  .mobile-hide {
+    display: none !important;
+  }
+
+  .mobile-only {
+    display: block !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-only {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .mobile-stack {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .mobile-full {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .mobile-padding {
+    padding: 20px 16px !important;
+  }
+
+  .mobile-p-24 {
+    padding: 24px !important;
+  }
+
+  .mobile-gap-8 {
+    gap: 8px !important;
+  }
+
+  .mobile-mb-20 {
+    margin-bottom: 20px !important;
+  }
+
+  /* Specifically for Editor */
+  .tiptap {
+    font-size: 15px;
+    padding: 20px 16px;
+  }
+
+  .tiptap h1 {
+    font-size: 28px;
+  }
+
+  /* Fix for context menu on mobile */
+  .mobile-context-menu {
+    left: 16px !important;
+    right: 16px !important;
+    top: auto !important;
+    bottom: 20px !important;
+    width: auto !important;
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }

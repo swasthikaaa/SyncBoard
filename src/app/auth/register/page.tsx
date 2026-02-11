@@ -53,6 +53,7 @@ export default function RegisterPage() {
             <motion.div
                 initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
+                className="mobile-stack mobile-full"
                 style={{
                     display: 'flex',
                     width: '100%',
@@ -66,15 +67,18 @@ export default function RegisterPage() {
                 }}
             >
                 {/* Left Side - Register Form */}
-                <div style={{
-                    flex: 1,
-                    padding: '60px 80px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                }}>
-                    <h1 style={{ fontSize: '48px', fontWeight: 900, color: '#1e1b4b', marginBottom: '30px', letterSpacing: '-0.02em' }}>Sign Up</h1>
+                <div
+                    className="mobile-padding mobile-full"
+                    style={{
+                        flex: 1,
+                        padding: '60px 80px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                    }}
+                >
+                    <h1 style={{ fontSize: 'var(--fs-title)', fontWeight: 900, color: '#1e1b4b', marginBottom: '30px', letterSpacing: '-0.02em' }}>Sign Up</h1>
 
                     <form onSubmit={handleSubmit} style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '15px' }}>
                         {error && <p style={{ color: '#ef4444', fontSize: '13px', textAlign: 'center', fontWeight: 'bold' }}>{error}</p>}
@@ -176,19 +180,22 @@ export default function RegisterPage() {
                 </div>
 
                 {/* Right Side - Branding/Switch */}
-                <div style={{
-                    flex: 1,
-                    background: 'linear-gradient(135deg, #1e1b4b 0%, #6366f1 100%)',
-                    padding: '60px 50px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#fff',
-                    textAlign: 'center',
-                    position: 'relative',
-                    overflow: 'hidden'
-                }}>
+                <div
+                    className="mobile-hide"
+                    style={{
+                        flex: 1,
+                        background: 'linear-gradient(135deg, #1e1b4b 0%, #6366f1 100%)',
+                        padding: '60px 50px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: '#fff',
+                        textAlign: 'center',
+                        position: 'relative',
+                        overflow: 'hidden'
+                    }}
+                >
                     <div style={{ position: 'absolute', top: '-10%', left: '-10%', width: '300px', height: '300px', background: 'rgba(255,255,255,0.05)', borderRadius: '50%' }} />
 
                     <h2 style={{ fontSize: '32px', fontWeight: 900, marginBottom: '20px', letterSpacing: '-0.01em', position: 'relative' }}>Join us!</h2>
