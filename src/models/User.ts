@@ -5,6 +5,8 @@ export interface IUser extends MongoDocument {
     email: string;
     password: string;
     avatarColor: string;
+    resetOTP?: string;
+    resetOTPExpires?: Date;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -26,6 +28,8 @@ const UserSchema = new Schema<IUser>(
                 return colors[Math.floor(Math.random() * colors.length)];
             },
         },
+        resetOTP: { type: String },
+        resetOTPExpires: { type: Date },
     },
     { timestamps: true }
 );

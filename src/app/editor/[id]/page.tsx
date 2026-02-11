@@ -39,6 +39,7 @@ import {
     Loader2,
     ChevronLeft,
     Check,
+    CheckCircle2,
     AlertCircle,
     Plus
 } from 'lucide-react';
@@ -315,18 +316,79 @@ export default function EditorPage() {
             {/* Share Modal */}
             <AnimatePresence>
                 {showShareModal && (
-                    <>
-                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.4)', zIndex: 200 }} onClick={() => setShowShareModal(false)} />
-                        <motion.div initial={{ scale: 0.9, opacity: 0, y: 20 }} animate={{ scale: 1, opacity: 1, y: 0 }} exit={{ scale: 0.9, opacity: 0, y: 20 }} style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: '#fff', padding: 40, borderRadius: 24, zIndex: 201, width: '100%', maxWidth: 440, boxShadow: '0 30px 60px rgba(0,0,0,0.2)' }}>
-                            <h3 style={{ fontSize: 20, fontWeight: 900, marginBottom: 20 }}>Invite Collaborators</h3>
+                    <div style={{ position: 'fixed', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 200, padding: 20 }}>
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            style={{ position: 'absolute', inset: 0, background: 'rgba(15, 23, 42, 0.4)', backdropFilter: 'blur(4px)' }}
+                            onClick={() => setShowShareModal(false)}
+                        />
+                        <motion.div
+                            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                            animate={{ scale: 1, opacity: 1, y: 0 }}
+                            exit={{ scale: 0.9, opacity: 0, y: 20 }}
+                            style={{
+                                position: 'relative',
+                                background: '#fff',
+                                padding: '40px 32px',
+                                borderRadius: 32,
+                                width: '100%',
+                                maxWidth: 440,
+                                boxShadow: '0 30px 100px -15px rgba(0,0,0,0.3)',
+                                zIndex: 1
+                            }}
+                        >
+                            <h3 style={{ fontSize: 24, fontWeight: 900, marginBottom: 8, color: '#0f172a', letterSpacing: '-0.03em' }}>Invite Collaborators</h3>
+                            <p style={{ color: '#64748b', fontSize: 14, marginBottom: 24, fontWeight: 500 }}>Share this document with your team members by email.</p>
+
                             <div style={{ display: 'flex', gap: 10 }}>
-                                <input value={shareEmail} onChange={(e) => setShareEmail(e.target.value)} placeholder="email@example.com" style={{ flex: 1, padding: 12, borderRadius: 12, border: '1px solid #e2e8f0', outline: 'none' }} />
-                                <button onClick={handleShare} style={{ padding: '0 20px', background: '#6366f1', color: '#fff', border: 'none', borderRadius: 12, fontWeight: 800 }}><Plus size={20} /></button>
+                                <input
+                                    value={shareEmail}
+                                    onChange={(e) => setShareEmail(e.target.value)}
+                                    placeholder="Enter collaborator email"
+                                    style={{
+                                        flex: 1,
+                                        padding: '14px 18px',
+                                        borderRadius: 16,
+                                        border: '1.5px solid #eef2f6',
+                                        outline: 'none',
+                                        background: '#f8fafc',
+                                        fontSize: 14,
+                                        fontWeight: 500
+                                    }}
+                                />
+                                <button
+                                    onClick={handleShare}
+                                    style={{
+                                        padding: '0 20px',
+                                        background: '#6366f1',
+                                        color: '#fff',
+                                        border: 'none',
+                                        borderRadius: 16,
+                                        fontWeight: 900,
+                                        cursor: 'pointer',
+                                        boxShadow: '0 4px 12px rgba(99, 102, 241, 0.3)'
+                                    }}
+                                >
+                                    <Plus size={22} />
+                                </button>
                             </div>
-                            {shareError && <p style={{ color: '#ef4444', fontSize: 12, marginTop: 10 }}>{shareError}</p>}
-                            {shareSuccess && <p style={{ color: '#10b981', fontSize: 12, marginTop: 10 }}>{shareSuccess}</p>}
+
+                            {shareError && (
+                                <div style={{ color: '#ef4444', fontSize: 13, marginTop: 16, background: '#fef2f2', padding: '10px 14px', borderRadius: 12, fontWeight: 700, display: 'flex', alignItems: 'center', gap: 8 }}>
+                                    <AlertCircle size={14} />
+                                    {shareError}
+                                </div>
+                            )}
+                            {shareSuccess && (
+                                <div style={{ color: '#10b981', fontSize: 13, marginTop: 16, background: '#f0fdf4', padding: '10px 14px', borderRadius: 12, fontWeight: 700, display: 'flex', alignItems: 'center', gap: 8 }}>
+                                    <CheckCircle2 size={14} />
+                                    {shareSuccess}
+                                </div>
+                            )}
                         </motion.div>
-                    </>
+                    </div>
                 )}
             </AnimatePresence>
         </div>

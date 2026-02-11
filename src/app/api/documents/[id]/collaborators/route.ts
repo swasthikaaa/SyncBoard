@@ -26,8 +26,11 @@ export async function POST(
             return NextResponse.json({ error: 'Document not found' }, { status: 404 });
         }
 
-        if (document.owner.toString() !== userId) {
-            return NextResponse.json({ error: 'Only the owner can add collaborators' }, { status: 403 });
+        const isOwner = document.owner.toString() === userId;
+        const isCollaborator = document.collaborators.some((c: any) => c.toString() === userId);
+
+        if (!isOwner && !isCollaborator) {
+            return NextResponse.json({ error: 'Only participants can add collaborators' }, { status: 403 });
         }
 
         const collaborator = await User.findOne({ email: email.toLowerCase() });
